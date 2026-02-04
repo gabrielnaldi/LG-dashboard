@@ -37,6 +37,8 @@ class Productivity {
     public static function create( string $id, string $productName, int $produced, int $defects): self {
         if($id === "") throw new ProductivityException("ID can not be empty!");
 
+        if($productName === "") throw new ProductivityException("Product name can not be empty!");
+
         $productivity = new self($id, $productName, $produced, $defects) ;
 
         return $productivity;
