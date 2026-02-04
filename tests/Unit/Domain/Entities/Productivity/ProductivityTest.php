@@ -36,4 +36,17 @@ class ProductivityTest extends TestCase
             20
         );
     }
+
+    public function test_it_should_not_allow_an_empty_productName(): void
+    {
+        $this->expectException(ProductivityException::class);
+        $this->expectExceptionMessage('Product name can not be empty!');
+
+        Productivity::create(
+            "1",
+            "",
+            10,
+            20
+        );
+    }
 }
