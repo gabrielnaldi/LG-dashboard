@@ -49,4 +49,17 @@ class ProductivityTest extends TestCase
             20
         );
     }
+
+    public function test_it_should_not_allow_produced_value_to_be_negative(): void
+    {
+        $this->expectException(ProductivityException::class);
+        $this->expectExceptionMessage('Produced value can not be negative!');
+
+        Productivity::create(
+            "1",
+            "Bicicleta",
+            -1,
+            20
+        );
+    }
 }
