@@ -15,6 +15,22 @@ class Productivity {
         $this->defects = $defects;
     }
 
+    public function id(): string {
+        return $this->id;
+    }
+
+    public function productName(): string {
+        return $this->productName;
+    }
+
+    public function produced(): int {
+        return $this->produced;
+    }
+
+    public function defects(): int {
+        return $this->defects;
+    }
+
     public static function create( string $id, string $productName, int $produced, int $defects): self {
         $productivity = new self($id, $productName, $produced, $defects) ;
 
