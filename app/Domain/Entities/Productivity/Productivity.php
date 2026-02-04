@@ -39,6 +39,10 @@ class Productivity {
 
         if($productName === "") throw new ProductivityException("Product name can not be empty!");
 
+        if($produced < 0) throw new ProductivityException("Produced value can not be negative!");
+
+        if($defects < 0) throw new ProductivityException("Defects value can not be negative!");
+
         $productivity = new self($id, $productName, $produced, $defects) ;
 
         return $productivity;
