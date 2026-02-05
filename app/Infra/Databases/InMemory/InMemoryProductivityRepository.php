@@ -17,7 +17,7 @@ class InMemoryProductivityRepository implements ProductivityRepository {
     public function save(Productivity $productivity): Productivity {
         $this->items[$productivity->id()] = $productivity;
 
-        return $productivity;
+        return $productivity ?? null;
     }
 
     public function list(int $page, int $limit): array {
