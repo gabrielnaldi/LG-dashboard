@@ -83,4 +83,17 @@ class ProductivityTest extends TestCase
 
         $this->assertEquals(80.0, $effectiveness);
     }
+
+    public function test_it_should_return_zero_when_there_are_no_produced_unities(): void {
+        $productivity = Productivity::create(
+            '1',
+            'Bicicleta',
+            0,
+            0
+        );
+
+        $effectiveness = $productivity->calculateEffectiveness();
+
+        $this->assertEquals(0.0, $effectiveness);
+    }
 }
