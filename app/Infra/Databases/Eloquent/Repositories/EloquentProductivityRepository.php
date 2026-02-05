@@ -16,6 +16,7 @@ class EloquentProductivityRepository implements ProductivityRepository {
                 'produced' => $productivity->produced(),
                 'defects' => $productivity->defects(),
                 'created_at' => $productivity->createdAt()->format('Y-m-d H:i:s'),
+                'updated_at' => $productivity->updatedAt()->format('Y-m-d H:i:s'),
             ]
         ]);
 
@@ -33,7 +34,7 @@ class EloquentProductivityRepository implements ProductivityRepository {
     /** @return Productivity[] */
     public function list(int $page, int $limit): array {
         $models = ProductivityModel::query()
-        ->orderBy('created_at', 'desc')
+        ->orderBy('updated_at', 'desc')
         ->offset(($page - 1) * $limit)
         ->limit($limit)
         ->get();
