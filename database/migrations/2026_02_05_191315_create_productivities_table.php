@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('produced');
             $table->integer('defects');
             $table->timestamp('created_at');
+            $table->timestamp('updated_at');
         });
     }
 

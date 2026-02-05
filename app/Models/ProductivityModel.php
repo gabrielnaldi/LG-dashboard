@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductivityModel extends Model {
     protected $table = 'productivities';
-    protected $fillable = ['id', 'product', 'produced', 'defects', 'created_at'];
+    protected $fillable = ['id', 'product', 'produced', 'defects', 'created_at',  'updated_at'];
     protected $keyType = 'string';
     public $incrementing = false;
 }
