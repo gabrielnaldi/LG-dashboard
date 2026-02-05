@@ -4,6 +4,7 @@ namespace Tests\Unit\Domain\Entities\Productivity;
 
 use App\Domain\Entities\Productivity\Productivity;
 use App\Domain\Exceptions\Productivity\ProductivityException;
+use DateTimeImmutable;
 use Tests\TestCase;
 
 class ProductivityTest extends TestCase
@@ -21,6 +22,11 @@ class ProductivityTest extends TestCase
         $this->assertEquals('TV', $productivity->product());
         $this->assertEquals(100, $productivity->produced());
         $this->assertEquals(5, $productivity->defects());
+        $this->assertInstanceOf(DateTimeImmutable::class, $productivity->createdAt());
+
+        $now = new DateTimeImmutable();
+        $diff = $now->getTimestamp() - $productivity->createdAt()->getTimestamp();
+        $this->assertLessThan(5, $diff, 'createdAt deve ser recente');
     }
 
     public function test_it_should_not_allow_an_empty_id(): void {
