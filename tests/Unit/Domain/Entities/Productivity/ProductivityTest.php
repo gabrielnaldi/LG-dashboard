@@ -96,4 +96,16 @@ class ProductivityTest extends TestCase
 
         $this->assertEquals(0.0, $effectiveness);
     }
+
+    public function test_it_should_not_allow_defects_value_to_be_higher_than_produced_value(): void {
+        $this->expectException(ProductivityException::class);
+        $this->expectExceptionMessage('The number of defects cannot exceed the quantity produced!');
+
+        Productivity::create(
+            '1',
+            'Bicicleta',
+            1,
+            2
+        );
+    }
 }
