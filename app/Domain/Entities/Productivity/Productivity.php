@@ -11,13 +11,15 @@ class Productivity {
     private int $produced;
     private int $defects;
     private DateTimeImmutable $createdAt;
+    private DateTimeImmutable $updatedAt;
 
-    private function __construct(string $id, string $product, int $produced, int $defects, DateTimeImmutable $createdAt) {
+    private function __construct(string $id, string $product, int $produced, int $defects, DateTimeImmutable $createdAt, DateTimeImmutable $updatedAt) {
         $this->id = $id;
         $this->product = $product;
         $this->produced = $produced;
         $this->defects = $defects;
         $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
     }
 
     public function id(): string {
@@ -40,6 +42,10 @@ class Productivity {
         return $this->createdAt;
     }
 
+    public function updatedAt(): DateTimeImmutable {
+        return $this->updatedAt;
+    }
+
     public function calculateEffectiveness(): float {
         if($this->produced === 0) return 0.0;
 
@@ -53,7 +59,7 @@ class Productivity {
 
         $now = new DateTimeImmutable();
 
-        $productivity = new self($id, $product, $produced, $defects, $now) ;
+        $productivity = new self($id, $product, $produced, $defects, $now, $now) ;
 
         return $productivity;
     }
