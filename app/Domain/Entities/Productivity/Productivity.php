@@ -34,6 +34,12 @@ class Productivity {
         return $this->defects;
     }
 
+    public function calculateEffectiveness(): float {
+        $effectiveness = (($this->produced - $this->defects) / ($this->produced)) * 100;
+
+        return $effectiveness;
+    }
+
     public static function create(string $id, string $product, int $produced, int $defects): self {
         self::validateAttributes($id, $product, $produced, $defects);
 
