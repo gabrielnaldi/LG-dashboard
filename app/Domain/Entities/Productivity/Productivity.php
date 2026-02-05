@@ -3,7 +3,6 @@
 namespace App\Domain\Entities\Productivity;
 
 use App\Domain\Exceptions\Productivity\ProductivityException;
-use DomainException;
 
 class Productivity {
     private string $id;
@@ -70,10 +69,15 @@ class Productivity {
         if($defects < 0) throw new ProductivityException("Defects value can not be negative!");
     }
 
+    private static function compareProducedWithDefects(int $produced, int $defects) {
+        if($defects > $produced) throw new ProductivityException("The number of defects cannot exceed the quantity produced!");
+    }
+
     private static function validateAttributes(string $id, string $product, int $produced, int $defects): void {
         self::validateId($id);
         self::validateProduct($product);
         self::validateProduced($produced);
         self::validateDefects($defects);
+        self::compareProducedWithDefects($produced, $defects);
     }
 }
