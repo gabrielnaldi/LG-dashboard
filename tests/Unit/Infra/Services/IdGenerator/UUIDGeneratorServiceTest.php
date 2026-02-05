@@ -21,4 +21,11 @@ class UUIDGeneratorServiceTest extends TestCase {
         $pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i';
         $this->assertMatchesRegularExpression($pattern, $uuid);
     }
+
+    public function test_it_should_generate_unique_ids(): void {
+        $firstUUID = $this->uuidService->generate();
+        $secondUUID = $this->uuidService->generate();
+
+        $this->assertNotEquals($firstUUID, $secondUUID);
+    }
 }
