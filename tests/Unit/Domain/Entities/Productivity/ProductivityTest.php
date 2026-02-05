@@ -23,10 +23,13 @@ class ProductivityTest extends TestCase
         $this->assertEquals(100, $productivity->produced());
         $this->assertEquals(5, $productivity->defects());
         $this->assertInstanceOf(DateTimeImmutable::class, $productivity->createdAt());
+        $this->assertInstanceOf(DateTimeImmutable::class, $productivity->updatedAt());
 
         $now = new DateTimeImmutable();
-        $diff = $now->getTimestamp() - $productivity->createdAt()->getTimestamp();
-        $this->assertLessThan(5, $diff, 'createdAt deve ser recente');
+        $createDiff = $now->getTimestamp() - $productivity->createdAt()->getTimestamp();
+        $updatedDiff = $now->getTimestamp() - $productivity->updatedAt()->getTimestamp();
+        $this->assertLessThan(5, $createDiff, 'createdAt deve ser recente');
+        $this->assertLessThan(5, $updatedDiff, 'updatedAt deve ser recente');
     }
 
     public function test_it_should_not_allow_an_empty_id(): void {
