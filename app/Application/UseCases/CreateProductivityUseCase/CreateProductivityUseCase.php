@@ -15,11 +15,13 @@ class CreateProductivityUseCase {
       $this->idGeneratorService = $idGeneratorService;
     }
 
-    public function execute(string $product, int $produced, int $defects) {
+    public function execute(string $product, int $produced, int $defects): Productivity {
         $generatedId = $this->idGeneratorService->generate();
 
         $productivity = Productivity::create($generatedId, $product, $produced, $defects);
 
-        $this->productivityRepository->save($productivity);
+        $savedProductivity = $this->productivityRepository->save($productivity);
+
+        return $savedProductivity;
     }
 }
