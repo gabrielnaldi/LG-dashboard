@@ -35,6 +35,8 @@ class Productivity {
     }
 
     public function calculateEffectiveness(): float {
+        if($this->produced === 0) return 0.0;
+
         $effectiveness = (($this->produced - $this->defects) / ($this->produced)) * 100;
 
         return $effectiveness;
