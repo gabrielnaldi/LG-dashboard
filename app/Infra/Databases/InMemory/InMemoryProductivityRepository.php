@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Infra\Databases\InMemory;
+
+use App\Domain\Entities\Productivity\Productivity;
+use App\Domain\Repositories\Productivity\ProductivityRepository;
+
+class InMemoryProductivityRepository implements ProductivityRepository {
+    private array $items = [];
+
+    public function findById(string $id): ?Productivity {
+        $productivity = $this->items[$id];
+
+        return $productivity;
+    }
+
+    public function save(Productivity $productivity): Productivity {
+        $this->items[$productivity->id()] = $productivity;
+
+        return $productivity;
+    }
+
+    public function list(int $page, int $limit): array {
+        $itemsCopy = $this->items;
+
+        usort($itemsCopy, fn($a, $b) => $a->createdAt() <=> $b->createdAt());
+
+        $offset = ($page - 1) * $limit;
+
+        $paginatedItems = array_slice($itemsCopy, $offset, $limit);
+
+        return $paginatedItems;
+    }
+}
