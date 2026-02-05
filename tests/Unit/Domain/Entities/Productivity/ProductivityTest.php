@@ -13,13 +13,13 @@ class ProductivityTest extends TestCase
     {
         $productivity = Productivity::create(
             id: "1",
-            productName: 'TV',
+            product: 'TV',
             produced: 100,
             defects: 5
         );
 
         $this->assertEquals('1', $productivity->id());
-        $this->assertEquals('TV', $productivity->productName());
+        $this->assertEquals('TV', $productivity->product());
         $this->assertEquals(100, $productivity->produced());
         $this->assertEquals(5, $productivity->defects());
     }
@@ -40,7 +40,7 @@ class ProductivityTest extends TestCase
     public function test_it_should_not_allow_an_empty_productName(): void
     {
         $this->expectException(ProductivityException::class);
-        $this->expectExceptionMessage('Product name can not be empty!');
+        $this->expectExceptionMessage('Product can not be empty!');
 
         Productivity::create(
             "1",
