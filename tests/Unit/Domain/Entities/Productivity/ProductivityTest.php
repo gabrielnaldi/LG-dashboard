@@ -9,8 +9,7 @@ use Tests\TestCase;
 class ProductivityTest extends TestCase
 {
 
-    public function test_it_should_create_a_valid_productivity(): void
-    {
+    public function test_it_should_create_a_valid_productivity(): void {
         $productivity = Productivity::create(
             id: "1",
             product: 'TV',
@@ -24,8 +23,7 @@ class ProductivityTest extends TestCase
         $this->assertEquals(5, $productivity->defects());
     }
 
-    public function test_it_should_not_allow_an_empty_id(): void
-    {
+    public function test_it_should_not_allow_an_empty_id(): void {
         $this->expectException(ProductivityException::class);
         $this->expectExceptionMessage('ID can not be empty!');
 
@@ -37,8 +35,7 @@ class ProductivityTest extends TestCase
         );
     }
 
-    public function test_it_should_not_allow_an_empty_productName(): void
-    {
+    public function test_it_should_not_allow_an_empty_productName(): void {
         $this->expectException(ProductivityException::class);
         $this->expectExceptionMessage('Product can not be empty!');
 
@@ -50,8 +47,7 @@ class ProductivityTest extends TestCase
         );
     }
 
-    public function test_it_should_not_allow_produced_value_to_be_negative(): void
-    {
+    public function test_it_should_not_allow_produced_value_to_be_negative(): void {
         $this->expectException(ProductivityException::class);
         $this->expectExceptionMessage('Produced value can not be negative!');
 
@@ -63,8 +59,7 @@ class ProductivityTest extends TestCase
         );
     }
 
-    public function test_it_should_not_allow_defects_value_to_be_negative(): void
-    {
+    public function test_it_should_not_allow_defects_value_to_be_negative(): void {
         $this->expectException(ProductivityException::class);
         $this->expectExceptionMessage('Defects value can not be negative!');
 
@@ -74,5 +69,18 @@ class ProductivityTest extends TestCase
             0,
             -2
         );
+    }
+
+    public function test_it_should_calculate_effectiveness(): void {
+        $productivity = Productivity::create(
+            '1',
+            'Bicicleta',
+            10,
+            2
+        );
+
+        $effectiveness = $productivity->calculateEffectiveness();
+
+        $this->assertEquals(80.0, $effectiveness);
     }
 }
