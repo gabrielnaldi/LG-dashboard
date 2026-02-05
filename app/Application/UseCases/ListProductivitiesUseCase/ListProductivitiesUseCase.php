@@ -11,6 +11,7 @@ class ListProductivitiesUseCase {
         $this->repository = $repository;
     }
 
+    /** @return Productivity[] */
     public function execute(int $page, int $limit): array {
         $productivities = $this->repository->list($page, $limit);
 
