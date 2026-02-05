@@ -3,18 +3,21 @@
 namespace App\Domain\Entities\Productivity;
 
 use App\Domain\Exceptions\Productivity\ProductivityException;
+use DateTimeImmutable;
 
 class Productivity {
     private string $id;
     private string $product;
     private int $produced;
     private int $defects;
+    private DateTimeImmutable $createdAt;
 
-    private function __construct(string $id, string $product, int $produced, int $defects) {
+    private function __construct(string $id, string $product, int $produced, int $defects, DateTimeImmutable $createdAt) {
         $this->id = $id;
         $this->product = $product;
         $this->produced = $produced;
         $this->defects = $defects;
+        $this->createdAt = $createdAt;
     }
 
     public function id(): string {
@@ -33,6 +36,10 @@ class Productivity {
         return $this->defects;
     }
 
+    public function createdAt(): DateTimeImmutable {
+        return $this->createdAt;
+    }
+
     public function calculateEffectiveness(): float {
         if($this->produced === 0) return 0.0;
 
@@ -44,7 +51,9 @@ class Productivity {
     public static function create(string $id, string $product, int $produced, int $defects): self {
         self::validateAttributes($id, $product, $produced, $defects);
 
-        $productivity = new self($id, $product, $produced, $defects) ;
+        $now = new DateTimeImmutable();
+
+        $productivity = new self($id, $product, $produced, $defects, $now) ;
 
         return $productivity;
     }
