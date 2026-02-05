@@ -34,17 +34,38 @@ class Productivity {
         return $this->defects;
     }
 
-    public static function create( string $id, string $product, int $produced, int $defects): self {
-        if($id === "") throw new ProductivityException("ID can not be empty!");
-
-        if($product === "") throw new ProductivityException("Product can not be empty!");
-
-        if($produced < 0) throw new ProductivityException("Produced value can not be negative!");
-
-        if($defects < 0) throw new ProductivityException("Defects value can not be negative!");
+    public static function create(string $id, string $product, int $produced, int $defects): self {
+        self::validateAttributes($id, $product, $produced, $defects);
 
         $productivity = new self($id, $product, $produced, $defects) ;
 
         return $productivity;
+    }
+
+    /* =======================
+       Validações de domínio
+       ======================= */
+
+    private static function validateId(string $id): void {
+        if($id === "") throw new ProductivityException("ID can not be empty!");
+    }
+
+    private static function validateProduct(string $product): void {
+        if($product === "") throw new ProductivityException("Product can not be empty!");
+    }
+
+    private static function validateProduced(int $produced): void {
+        if($produced < 0) throw new ProductivityException("Produced value can not be negative!");
+    }
+
+    private static function validateDefects(int $defects): void {
+        if($defects < 0) throw new ProductivityException("Defects value can not be negative!");
+    }
+
+    private static function validateAttributes(string $id, string $product, int $produced, int $defects): void {
+        self::validateId($id);
+        self::validateProduct($product);
+        self::validateProduced($produced);
+        self::validateDefects($defects);
     }
 }
