@@ -1,0 +1,15 @@
+.bg-sidebar {
+    background-color: #101727;
+}
+
+.bg-dark-blue {
+    background-color: #101727;
+}
+
+.hover-text-dark-blue:hover {
+    color: #101727;
+}
+
+.hover-bg-dark-blue:hover {
+    background-color: #101727;
+}
