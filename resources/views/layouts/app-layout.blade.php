@@ -18,6 +18,7 @@
         >
 
         <script src="{{ asset('js/sidebar.js') }}"></script>
+        <script src="{{ asset('js/form.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
     </head>
     <body class="bg-gray-100 text-gray-900">
@@ -29,11 +30,16 @@
             </div>
 
             {{-- FORM --}}
-            <form method="GET" action="{{ url('/productivities') }}" class="mb-4 flex space-x-2">
-                <input type="text" name="product" value="{{ $filter ?? '' }}"
-                    placeholder="Filtrar por produto"
-                    class="border rounded px-2 py-1">
-                <button type="submit" class="bg-blue-500 text-white px-4 py-1 rounded">Filtrar</button>
+            <form method="GET" id="filter-form" action="{{ url('/productivities') }}" class="mb-4 flex space-x-2">
+                <div class="relative">
+                    <input id="product-filter-input" type="text" name="product" class='outline-none py-2 pl-2 pr-6 rounded-md' value="{{ $filter ?? '' }}"
+                        placeholder="Pesquisar produto">
+                    <button type="button" id="clear-filter-button"
+                        class="absolute right-1 top-1/2 transform -translate-y-1/2 text-xs rounded-full bg-dark-blue h-4 w-4 text-white">
+                            x
+                    </button>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white font-semibold px-4 py-1 rounded-md hover:bg-blue-600">Filtrar</button>
             </form>
 
             {{-- MOBILE SIDEBAR --}}
