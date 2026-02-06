@@ -40,4 +40,12 @@ class ListProductivitiesUseCaseTest extends TestCase {
         $this->assertCount(5, $secondResult->items);
         $this->assertEquals(3, $secondResult->page);
     }
+
+    public function test_it_should_filter_by_product(): void {
+        $result = $this->usecase->execute(1, 10, 'Produto 1');
+        $this->assertInstanceOf(ListProductivitiesOutput::class, $result);
+        $this->assertIsArray($result->items);
+        $this->assertCount(1, $result->items);
+        $this->assertEquals('Produto 1', $result->items[0]->product());
+    }
 }
