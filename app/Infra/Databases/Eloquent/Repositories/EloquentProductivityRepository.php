@@ -4,6 +4,7 @@ namespace App\Infra\Databases\Eloquent\Repositories;
 
 use App\Domain\Entities\Productivity\Productivity;
 use App\Domain\Repositories\Productivity\ProductivityRepository;
+use App\Domain\Repositories\Types\ProductivityPaginatedResult;
 use App\Infra\Databases\Eloquent\Mappers\ProductivityMapper;
 use App\Models\ProductivityModel;
 
@@ -31,16 +32,22 @@ class EloquentProductivityRepository implements ProductivityRepository {
         return ProductivityMapper::toDomain($model);
     }
 
-    /** @return Productivity[] */
-    public function list(int $page, int $limit): array {
-        $models = ProductivityModel::query()
-        ->orderBy('updated_at', 'desc')
-        ->offset(($page - 1) * $limit)
+    public function list(int $page, int $limit): ProductivityPaginatedResult {
+        $offset = ($page - 1) * $limit;
+
+        $query = ProductivityModel::orderBy('updated_at', 'desc');
+
+        $total = $query->count();
+
+        $models = $query
         ->limit($limit)
+        ->offset($offset)
         ->get();
 
         $mappedModels = $models->map(fn ($model) => ProductivityMapper::toDomain($model))->toArray();
 
-        return $mappedModels;
+        $result = new ProductivityPaginatedResult($mappedModels, $total);
+
+        return $result;
     }
 }
