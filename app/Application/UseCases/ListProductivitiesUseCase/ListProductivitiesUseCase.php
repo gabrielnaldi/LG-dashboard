@@ -11,9 +11,8 @@ class ListProductivitiesUseCase {
         $this->repository = $repository;
     }
 
-    /** @return Productivity[] */
-    public function execute(int $page, int $limit): ListProductivitiesOutput {
-        $paginatedResult = $this->repository->list($page, $limit);
+    public function execute(int $page, int $limit, ?string $product = null): ListProductivitiesOutput {
+        $paginatedResult = $this->repository->list($page, $limit, $product);
 
         $output = new ListProductivitiesOutput(
             $paginatedResult->items,

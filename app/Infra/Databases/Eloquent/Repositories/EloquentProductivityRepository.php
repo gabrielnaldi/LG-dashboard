@@ -32,10 +32,14 @@ class EloquentProductivityRepository implements ProductivityRepository {
         return ProductivityMapper::toDomain($model);
     }
 
-    public function list(int $page, int $limit): ProductivityPaginatedResult {
+    public function list(int $page, int $limit, ?string $product = null): ProductivityPaginatedResult {
         $offset = ($page - 1) * $limit;
 
         $query = ProductivityModel::orderBy('updated_at', 'desc');
+
+        if ($product) {
+            $query->where('product', 'like', '%'.$product.'%');
+        }
 
         $total = $query->count();
 

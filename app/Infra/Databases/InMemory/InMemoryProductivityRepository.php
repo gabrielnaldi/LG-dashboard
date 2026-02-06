@@ -21,19 +21,20 @@ class InMemoryProductivityRepository implements ProductivityRepository {
         return $productivity ?? null;
     }
 
-    public function list(int $page, int $limit): ProductivityPaginatedResult {
-        $itemsCopy = $this->items;
+    public function list(int $page, int $limit, ?string $product): ProductivityPaginatedResult {
+        $filteredItems = $this->items;
 
-        usort($itemsCopy, fn($a, $b) => $a->createdAt() <=> $b->createdAt());
+        if ($product !== null) {
+            $filteredItems = array_filter($filteredItems, fn($item) => $item->product() === $product);
+        }
+
+        usort($filteredItems, fn($a, $b) => $b->updatedAt() <=> $a->updatedAt());
+
+        $total = count($filteredItems);
 
         $offset = ($page - 1) * $limit;
+        $paginatedItems = array_slice($filteredItems, $offset, $limit);
 
-        $paginatedItems = array_slice($itemsCopy, $offset, $limit);
-
-        $itemsCount = count($this->items);
-
-        $result = new ProductivityPaginatedResult($paginatedItems, $itemsCount);
-
-        return $result;
+        return new ProductivityPaginatedResult($paginatedItems, $total);
     }
 }

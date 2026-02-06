@@ -17,8 +17,10 @@ class ProductivityController extends Controller {
 
         $limit = $request->query('limit', 10);
 
-        $output = $this->listProductivitiesUseCase->execute($page, $limit);
+        $filter = $request->query('product', null);
 
-        return view('productivities.index', compact('output'));
+        $output = $this->listProductivitiesUseCase->execute($page, $limit, $filter);
+
+        return view('productivities.index', compact('output', 'filter'));
     }
 }
