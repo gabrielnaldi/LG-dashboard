@@ -22,7 +22,7 @@
     </head>
     <body class="bg-gray-100 text-gray-900">
         <main class="px-8 py-8">
-            <div class="mb-8">
+            <div class="mb-8 md:mb-0">
                 <button id="open-mobile-sidebar" class="p-0 text-2xl md:hidden">
                     ☰
                 </button>
@@ -77,7 +77,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($productivities as $productivity)
+                            @foreach ($output->items as $productivity)
                                 <tr>
                                     <td class="px-6 py-4">{{ $productivity->product() }}</td>
                                     <td class="px-6 py-4">{{ $productivity->produced() }}</td>
@@ -92,6 +92,20 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+
+                {{-- Paginacao --}}
+                @php
+                $totalPages = ceil($output->total / $output->limit);
+                @endphp
+
+                <div class="mt-4 flex justify-center space-x-2">
+                    @for ($i = 1; $i <= $totalPages; $i++)
+                        <a href="{{ url('/productivities?page='.$i) }}"
+                        class="px-3 py-1 rounded {{ $i == $output->page ? 'bg-blue-500 text-white' : 'bg-gray-200' }}">
+                        {{ $i }}
+                        </a>
+                    @endfor
                 </div>
             </div>
         </main>
