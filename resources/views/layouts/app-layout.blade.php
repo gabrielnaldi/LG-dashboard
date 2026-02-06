@@ -28,6 +28,14 @@
                 </button>
             </div>
 
+            {{-- FORM --}}
+            <form method="GET" action="{{ url('/productivities') }}" class="mb-4 flex space-x-2">
+                <input type="text" name="product" value="{{ $filter ?? '' }}"
+                    placeholder="Filtrar por produto"
+                    class="border rounded px-2 py-1">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-1 rounded">Filtrar</button>
+            </form>
+
             {{-- MOBILE SIDEBAR --}}
             <div id="mobile-sidebar-container" class="fixed inset-0 z-50 hidden md:hidden">
                 <div
