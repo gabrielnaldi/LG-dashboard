@@ -48,7 +48,7 @@ php artisan serve
 
 ### Acesse o endereço do projeto
 ```bash
-http://localhost:8000
+http://localhost:8000/productivities
 ```
 
 
@@ -62,10 +62,15 @@ vendor/bin/phpunit
 
 ### Considerações iniciais
 
-- A formula de efetividade foi ajustada.
+- A fórmula de efetividade foi ajustada.
   - No desafio, ela estava anotada como: ```efetividade = ( produzida / defeitos ) ```
     - Isso levaria a problemas quando um produto não possuísse defeitos (divisão por zero)
   - Foi alterada para: ```efetividade = (( produzidas - defeitos ) / produzidas) ```
+- O projeto segue os princípios do SOLID.
+  - Mantendo o projeto o mais desacoplado possível.
+- O projeto foi desenvolvido seguindo o TDD.
+  - Então todas as entidades, serviços e casos de usos estão testados.
+  - Os testes podem ser localizados em: ```test/Unit```
 
 ### Entidade Productivity
   
@@ -87,12 +92,33 @@ vendor/bin/phpunit
 - **product** não pode ser vazio
 - **produced** não pode ter valor negativo
 - **defects**: não pode ter valor negativo
-- A quantidade de produtos defeituosos não pode super a quantidade de produtos produzidos.
+- A quantidade de produtos defeituosos não pode superior a quantidade de produtos produzidos.
 
+### Estrutura
 
+- O projeto foi desenvolvido seguindo o padrão: Domain, Application e Infra.
+- A comunicação com o banco de dados se dá através dos repositórios.
+- Domain:
+  - Contém todas as regras de negócio.
+  - Validações
+  - Entidades
+  - Tipos
+  - Repositórios
+- Application:
+  - Contém ações disponíveis na plataforma
+  - Casos de uso
+  - Serviços
+- Infra:
+  - Contém implementações externas a plataforma.
+  - Repositórios (in-memory / reais).
+  
 ## Melhorias futuras
 
 - Adicionar testes E2E.
 - Adicionar uma tabela de produtos.
 - Relacionar a tabela de produtos com o tabela "Productivities" já existente.
 - Adicionar value objects como forma de validação em parâmetros de entidades. Como, por exemplo, ids.
+- Adicionar opção de inserção de dados no front-end (caso de uso já desenvolvido).
+- Adicionar opção de remoção de dados.
+- Adicionar modais.
+- Adicionar mais animações front-end.
