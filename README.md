@@ -41,6 +41,13 @@ docker compose up --build
 php artisan migrate --seed
 ```
 
+**Observação**: o seed contém 25 produtos e pode ser localizado em: ```database/seeders/ProductivitySeeder```
+
+### Gere uma API Key
+```bash
+php artisan key:generate
+```
+
 ### Rode o projeto
 ```bash
 php artisan serve
@@ -111,6 +118,16 @@ vendor/bin/phpunit
 - Infra:
   - Contém implementações externas a plataforma.
   - Repositórios (in-memory / reais).
+
+## Dados de acesso ao banco MySQL (docker)
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=lg_db
+DB_USERNAME=lg_user
+DB_PASSWORD=lg_pass
+```
   
 ## Melhorias futuras
 
