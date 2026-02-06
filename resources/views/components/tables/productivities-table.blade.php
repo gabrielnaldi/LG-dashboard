@@ -11,14 +11,14 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
             @foreach ($output->items as $productivity)
-            <tr>
-                <td class="px-6 py-4 whitespace-nowrap">{{ $productivity->product() }}</td>
-                <td class="px-6 py-4">{{ $productivity->produced() }}</td>
-                <td class="px-6 py-4">{{ $productivity->defects() }}</td>
-                <td class="px-6 py-4">
+            <tr class="hover-bg-dark-blue hover:text-white hover:cursor-pointer">
+                <td class="px-6 py-4 text-sm whitespace-nowrap">{{ $productivity->product() }}</td>
+                <td class="px-6 py-4 text-sm">{{ $productivity->produced() }}</td>
+                <td class="px-6 py-4 text-sm">{{ $productivity->defects() }}</td>
+                <td class="px-6 py-4 text-sm">
                     {{ number_format($productivity->calculateEffectiveness(), 2) }}%
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 text-sm">
                     {{ $productivity->createdAt()->format('d/m/Y') }}
                 </td>
             </tr>
