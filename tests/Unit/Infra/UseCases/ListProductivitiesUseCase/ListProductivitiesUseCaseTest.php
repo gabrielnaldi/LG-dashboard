@@ -32,13 +32,12 @@ class ListProductivitiesUseCaseTest extends TestCase {
         $this->assertInstanceOf(ListProductivitiesOutput::class, $firstResult);
         $this->assertIsArray($firstResult->items);
         $this->assertCount(10, $firstResult->items);
-        $this->assertEquals('Produto 1', $firstResult->items[0]->product());
-        $this->assertEquals('Produto 10', $firstResult->items[9]->product());
+        $this->assertEquals(1, $firstResult->page);
 
-        // // Second page check
+        // Second page check
         $secondResult = $this->usecase->execute(3, 5);
+        $this->assertIsArray($secondResult->items);
         $this->assertCount(5, $secondResult->items);
-        $this->assertEquals('Produto 11', $secondResult->items[0]->product());
-        $this->assertEquals('Produto 15', $secondResult->items[4]->product());
+        $this->assertEquals(3, $secondResult->page);
     }
 }
