@@ -51,7 +51,7 @@ class ProductivitySeeder extends Seeder
             ProductivityModel::create([
                 'id' => (string) Str::uuid(),
                 'product' => $product,
-                'produced' => rand(10, 500),
+                'produced' => rand(30, 500),
                 'defects' => rand(0, 20),
                 'created_at' => (new DateTimeImmutable())->format('Y-m-d H:i:s')
             ]);
