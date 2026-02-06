@@ -1,4 +1,4 @@
-<form method="GET" id="filter-form" action="{{ url('/productivities') }}" class="mb-8 flex space-x-2">
+<form method="GET" id="filter-form" action="{{ url('/productivities') }}" class="mb-8 flex sm:gap-x-2 gap-y-2 flex-col sm:flex-row">
     <div class="relative">
         <input id="product-filter-input" type="text" name="product" class='outline-none py-2 pl-2 pr-6 rounded-md' value="{{ $filter ?? '' }}"
         placeholder="Pesquisar produto">
@@ -7,5 +7,5 @@
             x
         </button>
     </div>
-    <button type="submit" class="bg-blue-500 text-white font-semibold px-4 py-1 rounded-md hover:bg-blue-600">Filtrar</button>
+    <button type="submit" class="w-32 md:w-fit bg-blue-500 text-white font-semibold px-4 py-1 rounded-md hover:bg-blue-600">Filtrar</button>
 </form>

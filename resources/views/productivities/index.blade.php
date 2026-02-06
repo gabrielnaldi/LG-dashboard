@@ -22,9 +22,9 @@
         <script src="{{ asset('js/app.js') }}"></script>
     </head>
     <body class="bg-gray-100 text-gray-900">
-        <main class="px-8 py-8">
-            <div class="mb-8 md:mb-0">
-                <button id="open-mobile-sidebar" class="p-0 text-2xl md:hidden">
+        <main class="h-screen w-screen">
+            <div class="">
+                <button id="open-mobile-sidebar" class="p-0 text-2xl md:hidden pt-4 pb-2 px-8">
                     ☰
                 </button>
             </div>
@@ -33,21 +33,31 @@
             @include('components.sidebars.mobile-sidebar')
 
 
-            {{-- Input de busca --}}
-            @include('components.forms.filter-form')
+            <div class="md:flex">
+                {{-- WEB SIDEBAR --}}
+                @include('components.sidebars.web-sidebar')
 
 
-            <div>
-                <h2 class="text-xl font-semibold mb-4">
-                    Produtividade
-                </h2>
+                <div class="pt-8 px-8 pb-8">
+                    {{-- Input de busca --}}
+                    @include('components.forms.filter-form')
 
-                {{-- Tabela de Produtividade --}}
-                @include('components.tables.productivities-table')
 
-                {{-- Paginacao --}}
-                @include('components.paginators.productivities-paginator')
+                    <div>
+                        <h2 class="text-xl font-semibold mb-4">
+                            Produtividade
+                        </h2>
+
+                        {{-- Tabela de Produtividade --}}
+                        @include('components.tables.productivities-table')
+
+                        {{-- Paginacao --}}
+                        @include('components.paginators.productivities-paginator')
+                    </div>
+                </div>
             </div>
+
+
         </main>
     </body>
 </html>

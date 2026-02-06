@@ -1,4 +1,4 @@
-<div id="web-sidebar" class="hidden md:block">
+<div id="web-sidebar" class="hidden md:block h-screen">
     <div class="w-64 h-full bg-sidebar shadow-lg">
         <div class="w-full flex justify-center py-5 px-3 mb-4">
             <h1 class="text-white font-bold text-2xl">LG Dashboard</h1>
