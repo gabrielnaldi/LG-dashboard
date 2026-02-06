@@ -12,9 +12,16 @@ class ListProductivitiesUseCase {
     }
 
     /** @return Productivity[] */
-    public function execute(int $page, int $limit): array {
-        $productivities = $this->repository->list($page, $limit);
+    public function execute(int $page, int $limit): ListProductivitiesOutput {
+        $paginatedResult = $this->repository->list($page, $limit);
 
-        return $productivities;
+        $output = new ListProductivitiesOutput(
+            $paginatedResult->items,
+            $page,
+            $limit,
+            $paginatedResult->total,
+        );
+
+        return $output;
     }
 }
